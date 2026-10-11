@@ -1,0 +1,34 @@
+[package]
+name = "acctswap"
+description = "Switch the account every Claude Code session on a machine uses, from saved logins, without a browser"
+readme = "../../README.md"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+repository.workspace = true
+keywords.workspace = true
+categories.workspace = true
+
+[[bin]]
+name = "acctswap"
+path = "src/main.rs"
+
+# `cargo binstall acctswap` downloads the release archive instead of building.
+[package.metadata.binstall]
+pkg-url = "{ repo }/releases/download/v{ version }/acctswap-{ target }{ archive-suffix }"
+bin-dir = "{ bin }{ binary-ext }"
+pkg-fmt = "tgz"
+
+[package.metadata.binstall.overrides.x86_64-pc-windows-msvc]
+pkg-fmt = "zip"
+
+[package.metadata.binstall.overrides.aarch64-pc-windows-msvc]
+pkg-fmt = "zip"
+
+[dependencies]
+acctswap-core = { path = "../acctswap-core", version = "0.2.0" }
+serde_json.workspace = true
+
+[lints]
+workspace = true

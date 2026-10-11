@@ -1,0 +1,16 @@
+[package]
+name = "acctswap-core"
+description = "The rules of acctswap: which saved Claude Code login to switch to, and how to switch safely. No file, Keychain or network access"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+repository.workspace = true
+keywords.workspace = true
+categories.workspace = true
+
+[dependencies]
+serde_json.workspace = true
+
+[lints]
+workspace = true

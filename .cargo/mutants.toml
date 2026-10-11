@@ -1,0 +1,2 @@
+# Kani proof harnesses only compile under `cargo kani`; Kani checks them, not the tests.
+exclude_re = ["proofs::"]

@@ -1,0 +1,12 @@
+# name                UseSwLock HonorCcLock IdentityCheck WithRefresh WithLogin  expect      invariants
+# The design, online: every protection on, every other writer active.
+Design_Refresh        TRUE      TRUE        TRUE          TRUE        FALSE      pass        TypeOK IdentityOK FreshSaves ConsistentWhenQuiet LocksOK
+Design_Login          TRUE      TRUE        TRUE          FALSE       TRUE       pass        TypeOK IdentityOK LocksOK
+Design_Both           TRUE      TRUE        TRUE          TRUE        TRUE       pass        TypeOK IdentityOK LocksOK
+# Offline: the API cannot confirm who owns the tokens, so the locks carry the guarantee.
+Offline_Refresh       TRUE      TRUE        FALSE         TRUE        FALSE      pass        TypeOK IdentityOK FreshSaves ConsistentWhenQuiet LocksOK
+Offline_OnlyCcLock    FALSE     TRUE        FALSE         TRUE        FALSE      pass        TypeOK IdentityOK FreshSaves
+# Counterexamples: each removed protection must make TLC find a violation.
+Offline_NoLocks       FALSE     FALSE       FALSE         FALSE       FALSE      IdentityOK  IdentityOK
+NoCcLock_Refresh      TRUE      FALSE       TRUE          TRUE        FALSE      FreshSaves  FreshSaves
+Offline_Login         TRUE      TRUE        FALSE         FALSE       TRUE       IdentityOK  IdentityOK

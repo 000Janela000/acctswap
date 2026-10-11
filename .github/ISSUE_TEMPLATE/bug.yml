@@ -1,0 +1,36 @@
+name: Bug
+description: acctswap did something wrong or failed
+body:
+  - type: markdown
+    attributes:
+      value: "Never paste tokens, `.credentials.json`, Keychain items or `~/.claude.json` here. Email addresses can be shortened (`a…@example.com`)."
+  - type: input
+    id: version
+    attributes:
+      label: acctswap version (`acctswap --version`)
+    validations:
+      required: true
+  - type: input
+    id: claude
+    attributes:
+      label: Claude Code version (`claude --version`)
+    validations:
+      required: true
+  - type: dropdown
+    id: os
+    attributes:
+      label: System
+      options: [macOS, Linux, Windows]
+    validations:
+      required: true
+  - type: input
+    id: installed
+    attributes:
+      label: Installed with (Homebrew, npm, pip/uv, cargo, by hand)
+  - type: textarea
+    id: what
+    attributes:
+      label: What you ran, what happened, what you expected
+      description: Include the full output, and for the hook the end of `~/.claude/logs/acctswap.log`.
+    validations:
+      required: true

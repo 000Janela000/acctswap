@@ -1,0 +1,25 @@
+name: Claude Code changed something
+description: acctswap stopped working after a Claude Code update
+labels: [claude-code-change]
+body:
+  - type: markdown
+    attributes:
+      value: "acctswap relies on how Claude Code stores its login, which Anthropic does not document. Until a fix lands, `/login` still works. Never paste tokens or credential files here."
+  - type: input
+    id: versions
+    attributes:
+      label: Claude Code version that broke it, and the last one that worked
+    validations:
+      required: true
+  - type: input
+    id: acctswap
+    attributes:
+      label: acctswap version and system
+    validations:
+      required: true
+  - type: textarea
+    id: what
+    attributes:
+      label: The error or what changed
+    validations:
+      required: true
