@@ -66,4 +66,4 @@ gh api -X PUT "repos/$tap/contents/Formula/acctswap.rb" --silent \
   -f message="feat: acctswap $v" \
   -f content="$(printf '%s\n' "$formula" | base64 | tr -d '\n')" \
   ${old:+-f sha="$old"}
-echo "tap updated: brew install $tap/acctswap  (or: brew upgrade acctswap)"
+echo "tap updated: brew install 000Janela000/acctswap/acctswap  (or: brew upgrade acctswap)"
