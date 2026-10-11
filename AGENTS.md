@@ -23,6 +23,7 @@ A Rust command-line tool that switches the Claude account every Claude Code sess
 |---|---|
 | `crates/acctswap-core/` | The rules: no file, Keychain or network access. Ports, the account decision, the switch protocol, Kani proofs, scenario tests with fakes |
 | `crates/acctswap/` | The `acctswap` binary: Keychain, file and curl adapters, the rate-limit hook, the commands |
+| `scripts/update-tap.sh` | Writes the Homebrew formula for a release into the tap, from its `SHA256SUMS` |
 | `spec/` | The TLA+ model of the switch protocol and its configurations (`spec/check.sh`) |
 | `.github/workflows/` | `ci.yml` (lint, tests on 3 systems, coverage, Kani, TLA+, cargo-deny); `release.yml` (binaries on a `v*` tag) |
 | `README.md` | Usage, how it works, what is verified, limits |
