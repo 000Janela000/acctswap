@@ -36,7 +36,7 @@ Releases are built on GitHub Actions; `gh attestation verify <file> -R 000Janela
 **The short name `sw`:** add a small script named `sw` next to your other commands, so it works in every shell and inside Claude Code (`! sw`), wherever the package manager put acctswap:
 
 - macOS, Linux: `printf '#!/bin/sh\nexec acctswap "$@"\n' > ~/.local/bin/sw && chmod +x ~/.local/bin/sw`
-- Windows: a file `sw.cmd` in a folder on your `PATH`, containing `@acctswap %*`
+- Windows: a copy of `acctswap.exe` named `sw.exe`, in the same folder. (Claude Code runs commands through Git Bash, which does not run a `sw.cmd` by the bare name `sw`.) Copy it again after each update.
 
 **Then, once per account:** `/login` to it in Claude Code and run `sw save`; give each a short name with `sw name <name>`. To switch automatically on a usage limit: `sw hook install`.
 
