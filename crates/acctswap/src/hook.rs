@@ -13,6 +13,9 @@ use serde_json::{Value, json};
 use crate::adapters::{NAME, OLD_NAME, write_atomic};
 
 const EVENT: &str = "StopFailure";
+/// What the hook asks sw to do; also how an entry is recognised when it was installed through a
+/// link with another name, such as `sw`.
+const ARGS: &str = "active --from-hook";
 
 fn load(settings: &Path) -> PortResult<Value> {
     match std::fs::read_to_string(settings) {
@@ -23,13 +26,13 @@ fn load(settings: &Path) -> PortResult<Value> {
     }
 }
 
-/// The command of a hook entry when it is ours: it mentions acctswap, or claude-sw (the old name,
-/// also older shell versions).
+/// The command of a hook entry when it is ours: it mentions acctswap or claude-sw (the old name,
+/// also older shell versions), or ends in our arguments (installed through a link such as `sw`).
 fn our_command(entry: &Value) -> Option<&str> {
     entry["hooks"].as_array()?.iter().find_map(|h| {
         h["command"]
             .as_str()
-            .filter(|c| c.contains(NAME) || c.contains(OLD_NAME))
+            .filter(|c| c.contains(NAME) || c.contains(OLD_NAME) || c.trim_end().ends_with(ARGS))
     })
 }
 
@@ -54,7 +57,7 @@ pub fn install(settings: &Path, program: &str) -> PortResult<()> {
     let mut list = without_ours(&list);
     list.push(json!({
         "matcher": "rate_limit",
-        "hooks": [{"type": "command", "command": format!("{program} active --from-hook"), "timeout": 60}]
+        "hooks": [{"type": "command", "command": format!("{program} {ARGS}"), "timeout": 60}]
     }));
     hooks[EVENT] = Value::Array(list);
     save(settings, &v)
@@ -157,7 +160,10 @@ mod tests {
             &settings,
             json!({"hooks": {
                 "SessionStart": [{"hooks": [{"type": "command", "command": "node sync-check.mjs"}]}],
-                "StopFailure": [{"matcher": "rate_limit", "hooks": [{"type": "command", "command": "sh -c '~/.local/bin/claude-sw active'"}]}]
+                "StopFailure": [
+                    {"matcher": "rate_limit", "hooks": [{"type": "command", "command": "sh -c '~/.local/bin/claude-sw active'"}]},
+                    {"matcher": "rate_limit", "hooks": [{"type": "command", "command": "\"/Users/x/.local/bin/sw\" active --from-hook"}]}
+                ]
             }, "theme": "dark"})
             .to_string(),
         )
@@ -168,7 +174,7 @@ mod tests {
         assert_eq!(
             list.len(),
             1,
-            "the old shell entry is replaced, not duplicated"
+            "the old shell entry and one installed through a link named sw are replaced, not duplicated"
         );
         assert_eq!(
             list[0]["hooks"][0]["command"],
