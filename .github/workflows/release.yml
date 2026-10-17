@@ -192,12 +192,12 @@ jobs:
         with:
           name: npm-package
           path: npm-package
-      # Asks the registry itself; `npm view` can answer from a stale cache. The `./` matters: npm
-      # reads `npm-package/acctswap-<v>.tgz` as the GitHub repo npm-package/acctswap-<v>.tgz.
+      # Asks the registry itself; `npm view` can answer from a stale cache. The `./` matters: without
+      # it npm reads `npm-package/<file>.tgz` as the GitHub repo npm-package/<file>.tgz.
       - run: |
           v=${GITHUB_REF_NAME#v}
-          if curl -sf "https://registry.npmjs.org/acctswap/$v" > /dev/null; then
-            echo "acctswap $v is already on npm"
+          if curl -sf "https://registry.npmjs.org/@cj-ways%2facctswap/$v" > /dev/null; then
+            echo "@cj-ways/acctswap $v is already on npm"
           else
-            npm publish "./npm-package/acctswap-$v.tgz" --access public
+            npm publish "./npm-package/cj-ways-acctswap-$v.tgz" --access public
           fi

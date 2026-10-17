@@ -25,13 +25,13 @@ Inside a session, run it as `! sw`; it works even when the account is at its lim
 
 | With | Command |
 |---|---|
-| Homebrew (macOS, Linux) | `brew install 000Janela000/acctswap/acctswap` |
-| npm | `npm install -g acctswap` (carries the program for all six systems, 3 MB; the other ways install only yours, 0.5 MB) |
+| Homebrew (macOS, Linux) | `brew install cj-ways/acctswap/acctswap` |
+| npm | `npm install -g @cj-ways/acctswap` (carries the program for all six systems, 3 MB; the other ways install only yours, 0.5 MB) |
 | pip or uv | `pip install acctswap`, or `uv tool install acctswap` |
 | cargo | `cargo binstall acctswap` (downloads the release) or `cargo install acctswap` (builds it) |
-| By hand | download the archive for your system from the [releases](https://github.com/000Janela000/acctswap/releases), check it against `SHA256SUMS`, and put `acctswap` on your `PATH` |
+| By hand | download the archive for your system from the [releases](https://github.com/cj-ways/acctswap/releases), check it against `SHA256SUMS`, and put `acctswap` on your `PATH` |
 
-Releases are built on GitHub Actions; `gh attestation verify <file> -R 000Janela000/acctswap` shows which workflow and commit built a file.
+Releases are built on GitHub Actions; `gh attestation verify <file> -R cj-ways/acctswap` shows which workflow and commit built a file. Releases up to 0.2.2 were built before the repo moved to `cj-ways`: check those with `--owner 000Janela000` instead of `-R`.
 
 **The short name `sw`:** add a small script named `sw` next to your other commands, so it works in every shell and inside Claude Code (`! sw`), wherever the package manager put acctswap:
 

@@ -1,6 +1,6 @@
 # acctswap — Agent Instructions
 
-A Rust command-line tool that switches the Claude account every Claude Code session on one machine uses, from saved copies of each login, without a browser. Saba runs it on his Mac, PC and server. The repo is public (`000Janela000/acctswap`); releases are built on GitHub Actions.
+A Rust command-line tool that switches the Claude account every Claude Code session on one machine uses, from saved copies of each login, without a browser. Saba runs it on his Mac, PC and server. The repo is public (`cj-ways/acctswap`); releases are built on GitHub Actions.
 
 **This file is shared by every AI agent.** Claude Code reads it through `CLAUDE.md`. Codex reads it directly. Keep tool-specific notes out of here.
 
@@ -24,7 +24,7 @@ A Rust command-line tool that switches the Claude account every Claude Code sess
 | `crates/acctswap-core/` | The rules: no file, Keychain or network access. Ports, the account decision, the switch protocol, Kani proofs, scenario tests with fakes |
 | `crates/acctswap/` | The `acctswap` binary: Keychain, file and curl adapters, the rate-limit hook, the commands |
 | `scripts/update-tap.sh` | Writes the Homebrew formula for a release into the tap, from its `SHA256SUMS` |
-| `scripts/npm-package.mjs` | Writes and packs the `acctswap` npm package of a release from its archives: the programs of all six systems in `native/<os>-<cpu>/` (1.7 MB) |
+| `scripts/npm-package.mjs` | Writes and packs the `@cj-ways/acctswap` npm package of a release from its archives: the programs of all six systems in `native/<os>-<cpu>/` (1.7 MB) |
 | `npm/acctswap.js` | The launcher in the npm package: runs the program for the system it is on |
 | `pyproject.toml` | maturin settings for the PyPI wheels (the program only, no Python code) |
 | `spec/` | The TLA+ model of the switch protocol and its configurations (`spec/check.sh`) |
@@ -39,7 +39,7 @@ A Rust command-line tool that switches the Claude account every Claude Code sess
 - Mutation testing must miss nothing: `cargo mutants -p acctswap-core` (scope with `-f <file>` while iterating).
 - Proofs: `cargo kani -p acctswap-core` (about 6 minutes). Model check: `spec/check.sh` (needs Java 11+ and the TLA+ jar it names).
 - Install from source: `cargo install --locked --path crates/acctswap`, then add the `sw` script (README, "Install").
-- **Deploy:** a `v*` tag builds release archives for macOS (arm64, x86_64), Linux (x86_64, arm64; musl) and Windows (x86_64, arm64), with `SHA256SUMS` and an attestation; the release is created as a draft and then published (immutable). Then the same run publishes to crates.io, PyPI and npm through trusted publishing: no tokens are stored, and each registry trusts only `release.yml` in its GitHub environment (`crates-io`, `pypi`, `npm`, which accept only `v*` tags). The tag must equal the version in `Cargo.toml`. Before a tag, run the release workflow by hand on `main` (`gh workflow run release.yml`): it builds and packs everything and publishes nothing. After a release, the session updates the Homebrew formula in `000Janela000/homebrew-acctswap`. Installed machines update only through a request to that machine's Claude session, which asks Saba there (`../_shared/standards/agent-coordination.md`).
+- **Deploy:** a `v*` tag builds release archives for macOS (arm64, x86_64), Linux (x86_64, arm64; musl) and Windows (x86_64, arm64), with `SHA256SUMS` and an attestation; the release is created as a draft and then published (immutable). Then the same run publishes to crates.io, PyPI and npm through trusted publishing: no tokens are stored, and each registry trusts only `release.yml` in its GitHub environment (`crates-io`, `pypi`, `npm`, which accept only `v*` tags). The tag must equal the version in `Cargo.toml`. Before a tag, run the release workflow by hand on `main` (`gh workflow run release.yml`): it builds and packs everything and publishes nothing. After a release, the session updates the Homebrew formula in `cj-ways/homebrew-acctswap`. Installed machines update only through a request to that machine's Claude session, which asks Saba there (`../_shared/standards/agent-coordination.md`).
 
 ## Rules
 - **Commits:** one line `type(scope): summary`, no body, no trailers.

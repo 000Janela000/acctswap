@@ -1,12 +1,12 @@
 #!/bin/sh
-# Writes the Homebrew formula for a published release into the tap 000Janela000/homebrew-acctswap,
+# Writes the Homebrew formula for a published release into the tap cj-ways/homebrew-acctswap,
 # from the release's SHA256SUMS. Run it after each release, with a gh login that can write the tap.
 #   scripts/update-tap.sh 0.2.0           write the formula
 #   scripts/update-tap.sh 0.2.0 --print   only print it
 set -eu
 v=${1:?usage: scripts/update-tap.sh <version> [--print]}
-repo=000Janela000/acctswap
-tap=000Janela000/homebrew-acctswap
+repo=cj-ways/acctswap
+tap=cj-ways/homebrew-acctswap
 base=https://github.com/$repo/releases/download/v$v
 sums=$(gh release download "v$v" -R "$repo" -p SHA256SUMS -O -)
 
@@ -66,4 +66,4 @@ gh api -X PUT "repos/$tap/contents/Formula/acctswap.rb" --silent \
   -f message="feat: acctswap $v" \
   -f content="$(printf '%s\n' "$formula" | base64 | tr -d '\n')" \
   ${old:+-f sha="$old"}
-echo "tap updated: brew install 000Janela000/acctswap/acctswap  (or: brew upgrade acctswap)"
+echo "tap updated: brew install cj-ways/acctswap/acctswap  (or: brew upgrade acctswap)"

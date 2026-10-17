@@ -1,9 +1,9 @@
 #!/usr/bin/env node
-// Writes and packs the npm package of one release from its archives: `acctswap`, carrying the
+// Writes and packs the npm package of one release from its archives: `@cj-ways/acctswap`, carrying the
 // program for each of the six systems in native/<os>-<cpu>/ and a launcher that runs the right
 // one. No install scripts.
 //   node scripts/npm-package.mjs <version> <archives-dir> <out-dir>
-// <out-dir> gets acctswap-<version>.tgz.
+// <out-dir> gets cj-ways-acctswap-<version>.tgz.
 import { execFileSync } from "node:child_process";
 import { chmodSync, copyFileSync, mkdirSync, mkdtempSync, rmSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
@@ -17,7 +17,7 @@ if (!version || !archivesArg || !outArg) {
 const root = resolve(import.meta.dirname, "..");
 const archives = resolve(archivesArg);
 const out = resolve(outArg);
-const repo = "https://github.com/000Janela000/acctswap";
+const repo = "https://github.com/cj-ways/acctswap";
 // npm adds a licence file by itself only when it is named LICENSE or LICENCE.
 const licences = ["LICENSE-MIT", "LICENSE-APACHE"];
 
@@ -47,7 +47,7 @@ copyFileSync(join(root, "npm", "acctswap.js"), join(pkg, "bin", "acctswap.js"));
 chmodSync(join(pkg, "bin", "acctswap.js"), 0o755);
 for (const f of ["README.md", ...licences]) copyFileSync(join(root, f), join(pkg, f));
 const manifest = {
-  name: "acctswap",
+  name: "@cj-ways/acctswap",
   version,
   description:
     "Switch the account every Claude Code session on a machine uses, from saved logins, without a browser",

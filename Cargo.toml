@@ -3,11 +3,11 @@ resolver = "3"
 members = ["crates/acctswap-core", "crates/acctswap"]
 
 [workspace.package]
-version = "0.2.2"
+version = "0.2.3"
 edition = "2024"
 rust-version = "1.89"          # std File::lock
 license = "MIT OR Apache-2.0"
-repository = "https://github.com/000Janela000/acctswap"
+repository = "https://github.com/cj-ways/acctswap"
 keywords = ["claude-code", "account", "switch", "cli"]
 categories = ["command-line-utilities"]
 

@@ -21,7 +21,7 @@ classifiers = [
 dynamic = ["version"]
 
 [project.urls]
-Repository = "https://github.com/000Janela000/acctswap"
+Repository = "https://github.com/cj-ways/acctswap"
 
 [tool.maturin]
 manifest-path = "crates/acctswap/Cargo.toml"
