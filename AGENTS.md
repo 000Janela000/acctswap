@@ -24,11 +24,11 @@ A Rust command-line tool that switches the Claude account every Claude Code sess
 | `crates/acctswap-core/` | The rules: no file, Keychain or network access. Ports, the account decision, the switch protocol, Kani proofs, scenario tests with fakes |
 | `crates/acctswap/` | The `acctswap` binary: Keychain, file and curl adapters, the rate-limit hook, the commands |
 | `scripts/update-tap.sh` | Writes the Homebrew formula for a release into the tap, from its `SHA256SUMS` |
-| `scripts/npm-packages.mjs` | Writes and packs the npm packages of a release from its archives: `@janela/acctswap-<os>-<cpu>` per system, and `acctswap` |
-| `npm/acctswap.js` | The launcher in the `acctswap` npm package: runs the program from the package for the system |
+| `scripts/npm-package.mjs` | Writes and packs the `acctswap` npm package of a release from its archives: the programs of all six systems in `native/<os>-<cpu>/` (1.7 MB) |
+| `npm/acctswap.js` | The launcher in the npm package: runs the program for the system it is on |
 | `pyproject.toml` | maturin settings for the PyPI wheels (the program only, no Python code) |
 | `spec/` | The TLA+ model of the switch protocol and its configurations (`spec/check.sh`) |
-| `.github/workflows/` | `ci.yml` (lint, tests on 3 systems, coverage, Kani, TLA+, cargo-deny); `release.yml` (on a `v*` tag: archives, wheels and npm packages, the GitHub release, then crates.io, PyPI and npm; run by hand it builds and publishes nothing) |
+| `.github/workflows/` | `ci.yml` (lint, tests on 3 systems, coverage, Kani, TLA+, cargo-deny); `release.yml` (on a `v*` tag: archives, wheels and the npm package, the GitHub release, then crates.io, PyPI and npm; run by hand it builds and publishes nothing) |
 | `README.md` | Usage, how it works, what is verified, limits |
 | `STATUS.md` | Current state and log; kept out of git, on Saba's machines only (Syncthing) |
 | `private/` | Personal notes, out of git: the publishing research (`private/publishing.md`) and a backup of the old claude-sw history |

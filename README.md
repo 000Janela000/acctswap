@@ -26,7 +26,7 @@ Inside a session, run it as `! sw`; it works even when the account is at its lim
 | With | Command |
 |---|---|
 | Homebrew (macOS, Linux) | `brew install 000Janela000/acctswap/acctswap` |
-| npm | `npm install -g acctswap` |
+| npm | `npm install -g acctswap` (carries the program for all six systems, 3 MB; the other ways install only yours, 0.5 MB) |
 | pip or uv | `pip install acctswap`, or `uv tool install acctswap` |
 | cargo | `cargo binstall acctswap` (downloads the release) or `cargo install acctswap` (builds it) |
 | By hand | download the archive for your system from the [releases](https://github.com/000Janela000/acctswap/releases), check it against `SHA256SUMS`, and put `acctswap` on your `PATH` |

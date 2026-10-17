@@ -1,18 +1,18 @@
 #!/usr/bin/env node
-// npm's `acctswap` command: runs the acctswap program from the package for this system
-// (`@janela/acctswap-<os>-<cpu>`), which npm installed as an optional dependency.
+// npm's `acctswap` command: runs the program for this system from native/<os>-<cpu>/ in this
+// package, which carries the programs for all six systems.
 "use strict";
 const { spawnSync } = require("child_process");
+const { existsSync } = require("fs");
+const path = require("path");
 
-const pkg = "@janela/acctswap-" + process.platform + "-" + process.arch;
+const system = process.platform + "-" + process.arch;
 const exe = process.platform === "win32" ? "acctswap.exe" : "acctswap";
-let bin;
-try {
-  bin = require.resolve(pkg + "/" + exe);
-} catch {
+const bin = path.join(__dirname, "..", "native", system, exe);
+if (!existsSync(bin)) {
   console.error(
-    "acctswap: " + pkg + " is not installed. There are builds for macOS, Linux and Windows " +
-      "on x64 and arm64; on one of those, reinstall without --omit=optional.",
+    "acctswap: no build for " + system + ". There are builds for macOS, Linux and Windows " +
+      "on x64 and arm64.",
   );
   process.exit(1);
 }
