@@ -1,0 +1,28 @@
+# PyPI wheels: maturin builds the acctswap program and puts it in a wheel, so `pip install acctswap`
+# and `uv tool install acctswap` put it on PATH. No Python code; the version comes from Cargo.toml.
+[build-system]
+requires = ["maturin>=1.15,<2"]
+build-backend = "maturin"
+
+[project]
+name = "acctswap"
+description = "Switch the account every Claude Code session on a machine uses, from saved logins, without a browser"
+readme = "README.md"
+license = "MIT OR Apache-2.0"
+license-files = ["LICENSE-MIT", "LICENSE-APACHE"]
+keywords = ["claude-code", "account", "switch", "cli"]
+classifiers = [
+    "Environment :: Console",
+    "Operating System :: MacOS",
+    "Operating System :: POSIX :: Linux",
+    "Operating System :: Microsoft :: Windows",
+    "Programming Language :: Rust",
+]
+dynamic = ["version"]
+
+[project.urls]
+Repository = "https://github.com/000Janela000/acctswap"
+
+[tool.maturin]
+manifest-path = "crates/acctswap/Cargo.toml"
+bindings = "bin"
