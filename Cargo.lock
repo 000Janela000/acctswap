@@ -4,7 +4,7 @@ version = 4
 
 [[package]]
 name = "acctswap"
-version = "0.2.1"
+version = "0.2.2"
 dependencies = [
  "acctswap-core",
  "serde_json",
@@ -12,7 +12,7 @@ dependencies = [
 
 [[package]]
 name = "acctswap-core"
-version = "0.2.1"
+version = "0.2.2"
 dependencies = [
  "serde_json",
 ]

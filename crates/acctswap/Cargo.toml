@@ -27,7 +27,7 @@ pkg-fmt = "zip"
 pkg-fmt = "zip"
 
 [dependencies]
-acctswap-core = { path = "../acctswap-core", version = "0.2.1" }
+acctswap-core = { path = "../acctswap-core", version = "0.2.2" }
 serde_json.workspace = true
 
 [lints]
