@@ -2,7 +2,7 @@
 
 Switch the Claude account that every Claude Code session on a machine uses, without a browser login.
 
-> Not affiliated with or endorsed by Anthropic. Claude and Claude Code are trademarks of Anthropic, PBC. Read [Risks](#risks) before you use it.
+> Not affiliated with or endorsed by Anthropic. Claude and Claude Code are trademarks of Anthropic, PBC.
 
 Claude Code keeps one shared saved login per machine, and every open session re-reads it. That is why one `/login` moves every open tab. acctswap does the same swap from saved copies of each account's login, so switching takes a second, needs no browser, and keeps background work running.
 
@@ -89,16 +89,6 @@ The usage endpoint rounds to whole percents, and an account that reads 100% can 
 - It reads and writes Claude Code's saved login on this machine, and keeps a copy of each account's login: in the macOS Keychain, or in owner-only files elsewhere.
 - The tokens go to one place only: `api.anthropic.com`, to read each account's usage and to ask whose tokens they are. They go through the system's `curl`, in a config on stdin, never on a command line.
 - Nothing else is sent anywhere. There is no telemetry and no server of ours.
-
-## Risks
-
-Anthropic's rules may not allow a tool like this. Use it at your own risk.
-
-- Claude Code's [legal page](https://code.claude.com/docs/en/legal-and-compliance) says: "developers may not collect, store, or intermediate Claude.ai credentials or session tokens". acctswap keeps copies of your login tokens on your own machine.
-- Anthropic's [Usage Policy](https://www.anthropic.com/legal/aup), effective 2026-11-12, forbids to "intentionally bypass or interfere with capabilities, restrictions, or guardrails established within our products, including by circumvention of the account sign-up or log-in process". Switching to another account when one hits its usage limit may be read that way.
-- Anthropic says it may enforce its rules "without prior notice". That could mean limits on, or suspension of, the accounts you use acctswap with.
-
-Having several accounts is allowed: Claude Code's own docs show [logging in with multiple accounts](https://code.claude.com/docs/en/authentication#log-in-with-multiple-accounts), one config folder per account. That is the documented way, if you prefer it.
 
 ## Limits
 
